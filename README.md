@@ -16,6 +16,9 @@ The initial pattern constitutes the seed of the system. The first generation is 
 
 TODO
 =====
+
 1) Make Animation work
+
 2) Handle extreme cases (borders)
+
 3) Make it pretty !
