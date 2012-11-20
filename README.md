@@ -1,3 +1,7 @@
+DISCLAIMER
+==========
+Somethings are probably wrong in my code since i've never tried Coffee Script before. Feel free to tell me how wrong I am, thx !
+
 CoffeeLife
 ==========
 
@@ -14,8 +18,10 @@ The universe of the Game of Life is an infinite two-dimensional orthogonal grid 
 
 The initial pattern constitutes the seed of the system. The first generation is created by applying the above rules simultaneously to every cell in the seed—births and deaths occur simultaneously, and the discrete moment at which this happens is sometimes called a tick (in other words, each generation is a pure function of the preceding one). The rules continue to be applied repeatedly to create further generations.
 
+
 TODO
 =====
+
 1) Make Animation work
-2) Handle extreme cases (borders)
-3) Make it pretty !
+
+2) Make it pretty !

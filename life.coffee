@@ -1,6 +1,7 @@
 $ = jQuery
 
 initGrid = (w,h) -> 
+	status = ["dead", "alive"]
 	window.grid = new Object()
 	window.grid.w = w
 	window.grid.h = h
@@ -19,7 +20,10 @@ isNeighborDead =(cell,x,y) ->
 		y=1
 	if(x>=grid.h)
 		x =1
-	grid[x][y] is "dead"
+	if grid[x][y] is "dead"
+		true
+	else
+		false
 
 aliveNeighbors = (x,y) ->
 	number = 0
@@ -29,7 +33,8 @@ aliveNeighbors = (x,y) ->
 	for a in [x-1..x+1]
 		for b in [y-1..y+1]
 			do =>
-			number += 1 if not isNeighborDead(cell,a,b)
+			if not isNeighborDead(cell,a,b)
+				number +=1
 	number
 
 deadOrAlive = (x,y) ->
@@ -56,45 +61,43 @@ nextGeneration = () ->
 			do =>
 			newGrid[x][y] = deadOrAlive(x,y)
 	window.grid = newGrid
-	console.log(newGrid)
 
-graphInit = ->
+initGraph = ->
 	$("#life").html("<canvas id=\"lifeCanvas\" width=\"800\" height=\"800\" > come on life ! </canvas>")
-	contexte = document.getElementById('lifeCanvas').getContext('2d');
-	contexte.fillStyle = "rgba(0,0,0,1)";
-	contexte.fillRect(0, 0, 802, 802)
-	contexte
+	window.contexte = document.getElementById('lifeCanvas').getContext('2d');
+	window.contexte.fillStyle = "rgba(0,0,0,1)";
+	window.contexte.fillRect(0, 0, 100, 100)
 
-drawCell = (contexte,grid,cell) ->
-	column = cell % 800;
-	row = (cell - column) / 800;
-	if grid[cell] is "alive"
-		contexte.fillStyle = "rgba(255,255,255,1)";
-		contexte.fillRect(column*16+1, 1 + row*16, 16, 16);
+drawCell = (x,y) ->
+	grid = window.grid
+	column = x;
+	row = y;
+	if grid[column][row] is "alive"
+		window.contexte.fillStyle = "rgba(255,255,255,1)";
+		window.contexte.fillRect(column, row, 1, 1);
 	else
-		contexte.fillStyle = "rgba(0,0,0,1)";
-		contexte.fillRect(column*16+1, 1 + row*16, 16, 16);
+		window.contexte.fillStyle = "rgba(0,0,0,1)";
+		window.contexte.fillRect(column,row, 1, 1);
 
-drawGrid = (contexte, grid) ->
-	drawCell(contexte,grid,cell) for cell in [gridSize..0]
+drawGrid = ->
+	for x in [1..grid.w]
+		for y in [1..grid.h]
+			do => 
+			drawCell(x,y)
 
 drawLoop = =>
-	drawGrid(contexte,grid)
-	window.grid = nextGeneration grid
-	alert(grid)
-	setTimeout(drawLoop,500)
-	
+	drawGrid()
+	nextGeneration()
+	setTimeout(drawLoop,10)
 
+mainPgm = =>
+	width = 100
+	height = 100
+	initGrid(width,height)
+	initGraph()
+	drawLoop()
 
-
-width = 200
-height = 200
-status = ["dead", "alive"]
-initGrid(width,height)
-console.log(window.grid)
-setInterval(nextGeneration,1000);
-
-
+mainPgm()
 
 
 
