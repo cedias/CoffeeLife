@@ -1,3 +1,5 @@
+[Click here to have a look at the result !](http://cedias.github.com/CoffeeLife)
+
 DISCLAIMER
 ==========
 Somethings are probably wrong in my code since i've never tried Coffee Script before. Feel free to tell me how wrong I am, thx !
