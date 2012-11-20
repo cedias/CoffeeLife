@@ -3,44 +3,33 @@ $ = jQuery
 initGrid = (w,h) -> 
 	status = ["dead", "alive"]
 	window.grid = new Object()
-	window.grid.w = w
-	window.grid.h = h
-	(window.grid[indexRow] = (status[Math.floor(Math.random()+0.1)] for height in [1..h]) for indexRow in [1..w])
+	window.grid.w = w-1
+	window.grid.h = h-1
+	(window.grid[indexRow] = (status[Math.floor(Math.random()+0.1)] for height in [0..h-1]) for indexRow in [0..w-1])
 	
 	
-isNeighborDead =(cell,x,y) ->
-	grid = window.grid
-	if(cell.x == x && cell.y == y)
-		true
-	if(x<1)
-		x = grid.h
-	if(y<1)
-		y = grid.w
-	if(y>=grid.w)
-		y=1
-	if(x>=grid.h)
-		x =1
-	if grid[x][y] is "dead"
-		true
+neighborStatus =(x,y,a,b) ->
+
+	if( (x is a && y is b) or a<0 or b<0 or b >= window.grid.w or a >= window.grid.h)
+		return "dead"
 	else
-		false
+	window.grid[a][b]
+	
 
 aliveNeighbors = (x,y) ->
 	number = 0
-	cell = new Object()
-	cell.x = x
-	cell.y = y
-	for a in [x-1..x+1]
+	for a in [x+1..x-1]
 		for b in [y-1..y+1]
 			do =>
-			if not isNeighborDead(cell,a,b)
+			if neighborStatus(x,y,a,b) is "alive"
 				number +=1
+			else
+				number +=0
 	number
 
 deadOrAlive = (x,y) ->
-	grid = window.grid
 	number = aliveNeighbors(x,y)
-	if grid[x][y] is "alive"
+	if window.grid[x][y] is "alive"
 		if number < 2 or number > 3
 			"dead"
 		else
@@ -54,50 +43,45 @@ deadOrAlive = (x,y) ->
 	
 nextGeneration = () ->
 	newGrid = window.grid
-	grid = window.grid
-	console.log(grid.w)
-	for x in [1..grid.w]
-		for y in [1..grid.h]
+	for x in [0..grid.w]
+		for y in [0..grid.h]
 			do =>
 			newGrid[x][y] = deadOrAlive(x,y)
 	window.grid = newGrid
 
-initGraph = ->
-	$("#life").html("<canvas id=\"lifeCanvas\" width=\"800\" height=\"800\" > come on life ! </canvas>")
+initGraph = (w,h) ->
+	$("#life").html("<canvas id=\"lifeCanvas\" width=\"#{w*10}\" height=\"#{h*10}\" > come on life ! </canvas>")
 	window.contexte = document.getElementById('lifeCanvas').getContext('2d');
 	window.contexte.fillStyle = "rgba(0,0,0,1)";
-	window.contexte.fillRect(0, 0, 100, 100)
+	window.contexte.fillRect(0, 0, w*16, h*16)
 
 drawCell = (x,y) ->
-	grid = window.grid
-	column = x;
-	row = y;
-	if grid[column][row] is "alive"
+	if window.grid[x][y] is "alive"
 		window.contexte.fillStyle = "rgba(255,255,255,1)";
-		window.contexte.fillRect(column, row, 1, 1);
+		window.contexte.fillRect(x*10, y*10, 10, 10);
 	else
 		window.contexte.fillStyle = "rgba(0,0,0,1)";
-		window.contexte.fillRect(column,row, 1, 1);
+		window.contexte.fillRect(x*10,y*10, 10, 10);
 
 drawGrid = ->
-	for x in [1..grid.w]
-		for y in [1..grid.h]
+	for x in [0..grid.w]
+		for y in [0..grid.h]
 			do => 
 			drawCell(x,y)
 
 drawLoop = =>
 	drawGrid()
 	nextGeneration()
-	setTimeout(drawLoop,10)
+	setTimeout(drawLoop,100)
 
-mainPgm = =>
-	width = 100
-	height = 100
+mainPgm =(width,height) =>
 	initGrid(width,height)
-	initGraph()
+	initGraph(width,height)
 	drawLoop()
 
-mainPgm()
+
+
+mainPgm(50,50)
 
 
 
