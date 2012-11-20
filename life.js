@@ -87,7 +87,7 @@
   initGraph = function(w, h) {
     $("#life").html("<canvas id=\"lifeCanvas\" width=\"" + (w * 10) + "\" height=\"" + (h * 10) + "\" > come on life ! </canvas>");
     window.contexte = document.getElementById('lifeCanvas').getContext('2d');
-    window.contexte.fillStyle = "rgba(0,0,0,1)";
+    window.contexte.fillStyle = "rgba(12,12,12,1)";
     return window.contexte.fillRect(0, 0, w * 16, h * 16);
   };
 
@@ -132,6 +132,6 @@
     return drawLoop();
   };
 
-  mainPgm(65, 65);
+  mainPgm(65, 30);
 
 }).call(this);
