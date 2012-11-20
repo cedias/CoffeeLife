@@ -81,7 +81,7 @@ mainPgm =(width,height) =>
 
 
 
-mainPgm(65,30)
+mainPgm(65,65)
 
 
 

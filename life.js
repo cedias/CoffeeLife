@@ -132,6 +132,6 @@
     return drawLoop();
   };
 
-  mainPgm(65, 30);
+  mainPgm(65, 65);
 
 }).call(this);
