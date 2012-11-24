@@ -1,13 +1,12 @@
-[Click here to have a look at the result !](http://cedias.github.com/CoffeeLife)
-
-DISCLAIMER
-==========
-Somethings are probably wrong in my code since i've never tried Coffee Script before. Feel free to tell me how wrong I am, thx !
-
 CoffeeLife
 ==========
 
 Conway's Game of Life in coffee script
+
+PREVIEW
+=======
+
+[Click here to have a look at the result !](http://cedias.github.com/CoffeeLife)
 
 RULES
 =======
@@ -19,4 +18,27 @@ The universe of the Game of Life is an infinite two-dimensional orthogonal grid 
 	Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
 
 The initial pattern constitutes the seed of the system. The first generation is created by applying the above rules simultaneously to every cell in the seed—births and deaths occur simultaneously, and the discrete moment at which this happens is sometimes called a tick (in other words, each generation is a pure function of the preceding one). The rules continue to be applied repeatedly to create further generations.
+
+USAGE
+======
+include life.js in your webpage
+	<script src="life.js"> </script>
+add a div which id is "life" for the canvas
+	<div id="life"></div>
+call the function (it's in your window object) <-- This isn't right, right ?
+	<script type="text/javascript"> coffeeLife(65,25); </script>
+
+TODO
+=====
+
+1. Add some options for custom use
+2. get the thing out of window ?
+3. cleaner syntax !
+
+LICENCE & DISCLAIMER
+==================
+You can use this code if you like, no restrictions!
+Be careful somethings are probably wrong since i've never tried Coffee Script before.
+
+
 
