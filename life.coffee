@@ -10,7 +10,7 @@ initGrid = (w,h) ->
 	
 neighborStatus =(x,y,a,b) ->
 
-	if( (x is a && y is b) or a<0 or b<0 or b >= window.grid.w or a >= window.grid.h)
+	if( (x is a && y is b) or a<=0 or b<=0 or b >= window.grid.h or a >= window.grid.w)
 		return "dead"
 	else
 	window.grid[a][b]
@@ -74,14 +74,11 @@ drawLoop = =>
 	nextGeneration()
 	setTimeout(drawLoop,100)
 
-mainPgm =(width,height) =>
+coffeeLife =(width,height) =>
 	initGrid(width,height)
 	initGraph(width,height)
 	drawLoop()
 
-
-
-mainPgm(65,65)
 
 
 
