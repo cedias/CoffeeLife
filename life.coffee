@@ -74,7 +74,7 @@ drawLoop = =>
 	nextGeneration()
 	setTimeout(drawLoop,100)
 
-coffeeLife =(width,height) =>
+Window.coffeeLife =(width,height) =>
 	initGrid(width,height)
 	initGraph(width,height)
 	drawLoop()
