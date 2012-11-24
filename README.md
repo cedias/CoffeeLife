@@ -22,10 +22,15 @@ The initial pattern constitutes the seed of the system. The first generation is 
 USAGE
 ======
 include life.js in your webpage
+
 	`<script src="life.js"> </script>`
+
 add a div which id is "life" for the canvas
+
 	`<div id="life"></div>`
+
 call the function (it's in your window object) <-- This isn't right, right ?
+
 	`<script type="text/javascript"> coffeeLife(65,25); </script>`
 
 TODO
