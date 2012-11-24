@@ -126,7 +126,7 @@
     return setTimeout(drawLoop, 100);
   };
 
-  Window.coffeeLife = function(width, height) {
+  window.coffeeLife = function(width, height) {
     initGrid(width, height);
     initGraph(width, height);
     return drawLoop();
