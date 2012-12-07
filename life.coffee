@@ -8,12 +8,11 @@ initGrid = (w,h) ->
 	(window.grid[indexRow] = (status[Math.floor(Math.random()+0.1)] for height in [0..h-1]) for indexRow in [0..w-1])
 	
 	
-neighborStatus =(x,y,a,b) ->
-
+neighborStatus = (x,y,a,b) ->
 	if( (x is a && y is b) or a<=0 or b<=0 or b >= window.grid.h or a >= window.grid.w)
 		return "dead"
 	else
-	window.grid[a][b]
+		window.grid[a][b]
 	
 
 aliveNeighbors = (x,y) ->
@@ -21,10 +20,10 @@ aliveNeighbors = (x,y) ->
 	for a in [x+1..x-1]
 		for b in [y-1..y+1]
 			do =>
-			if neighborStatus(x,y,a,b) is "alive"
-				number +=1
-			else
-				number +=0
+				if neighborStatus(x,y,a,b) is "alive"
+					number +=1
+				else
+					number +=0
 	number
 
 deadOrAlive = (x,y) ->
@@ -67,19 +66,17 @@ drawGrid = ->
 	for x in [0..grid.w]
 		for y in [0..grid.h]
 			do => 
-			drawCell(x,y)
+				drawCell(x,y)
 
 drawLoop = =>
 	drawGrid()
 	nextGeneration()
 	setTimeout(drawLoop,100)
 
-window.coffeeLife =(width,height) =>
+window.coffeeLife = (width,height) =>
 	initGrid(width,height)
 	initGraph(width,height)
 	drawLoop()
-
-
 
 
 

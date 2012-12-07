@@ -29,9 +29,8 @@
     if ((x === a && y === b) || a <= 0 || b <= 0 || b >= window.grid.h || a >= window.grid.w) {
       return "dead";
     } else {
-
+      return window.grid[a][b];
     }
-    return window.grid[a][b];
   };
 
   aliveNeighbors = function(x, y) {
@@ -39,14 +38,15 @@
       _this = this;
     number = 0;
     for (a = _i = _ref = x + 1, _ref1 = x - 1; _ref <= _ref1 ? _i <= _ref1 : _i >= _ref1; a = _ref <= _ref1 ? ++_i : --_i) {
-      _fn = function() {};
+      _fn = function() {
+        if (neighborStatus(x, y, a, b) === "alive") {
+          return number += 1;
+        } else {
+          return number += 0;
+        }
+      };
       for (b = _j = _ref2 = y - 1, _ref3 = y + 1; _ref2 <= _ref3 ? _j <= _ref3 : _j >= _ref3; b = _ref2 <= _ref3 ? ++_j : --_j) {
         _fn();
-        if (neighborStatus(x, y, a, b) === "alive") {
-          number += 1;
-        } else {
-          number += 0;
-        }
       }
     }
     return number;
@@ -106,13 +106,13 @@
     _results = [];
     for (x = _i = 0, _ref = grid.w; 0 <= _ref ? _i <= _ref : _i >= _ref; x = 0 <= _ref ? ++_i : --_i) {
       _results.push((function() {
-        var _fn, _j, _ref1, _results1,
+        var _j, _ref1, _results1,
           _this = this;
-        _fn = function() {};
         _results1 = [];
         for (y = _j = 0, _ref1 = grid.h; 0 <= _ref1 ? _j <= _ref1 : _j >= _ref1; y = 0 <= _ref1 ? ++_j : --_j) {
-          _fn();
-          _results1.push(drawCell(x, y));
+          _results1.push((function() {
+            return drawCell(x, y);
+          })());
         }
         return _results1;
       }).call(this));
