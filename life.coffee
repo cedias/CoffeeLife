@@ -1,4 +1,3 @@
-$ = jQuery
 
 initGrid = (w,h) -> 
 	status = ["dead", "alive"]
@@ -49,7 +48,7 @@ nextGeneration = () ->
 	window.grid = newGrid
 
 initGraph = (w,h) ->
-	$("#life").html("<canvas id=\"lifeCanvas\" width=\"#{w*10}\" height=\"#{h*10}\" > come on life ! </canvas>")
+	document.getElementById('life').innerHTML= "<canvas id=\"lifeCanvas\" width=\"#{w*10}\" height=\"#{h*10}\" > come on life ! </canvas>";
 	window.contexte = document.getElementById('lifeCanvas').getContext('2d');
 	window.contexte.fillStyle = "rgba(12,12,12,1)";
 	window.contexte.fillRect(0, 0, w*16, h*16)
