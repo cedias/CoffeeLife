@@ -1,17 +1,19 @@
 
+window.coffeeLife = new Object()
+
 initGrid = (w,h) -> 
 	status = ["dead", "alive"]
-	window.grid = new Object()
-	window.grid.w = w-1
-	window.grid.h = h-1
-	(window.grid[indexRow] = (status[Math.floor(Math.random()+0.1)] for height in [0..h-1]) for indexRow in [0..w-1])
+	coffeeLife.grid = new Object()
+	coffeeLife.grid.w = w-1
+	coffeeLife.grid.h = h-1
+	(coffeeLife.grid[indexRow] = (status[Math.floor(Math.random()+0.1)] for height in [0..h-1]) for indexRow in [0..w-1])
 	
 	
 neighborStatus = (x,y,a,b) ->
-	if( (x is a && y is b) or a<=0 or b<=0 or b >= window.grid.h or a >= window.grid.w)
+	if( (x is a && y is b) or a<=0 or b<=0 or b >= coffeeLife.grid.h or a >= coffeeLife.grid.w)
 		return "dead"
 	else
-		window.grid[a][b]
+		coffeeLife.grid[a][b]
 	
 
 aliveNeighbors = (x,y) ->
@@ -27,7 +29,7 @@ aliveNeighbors = (x,y) ->
 
 deadOrAlive = (x,y) ->
 	number = aliveNeighbors(x,y)
-	if window.grid[x][y] is "alive"
+	if coffeeLife.grid[x][y] is "alive"
 		if number < 2 or number > 3
 			"dead"
 		else
@@ -40,39 +42,45 @@ deadOrAlive = (x,y) ->
 
 	
 nextGeneration = () ->
-	newGrid = window.grid
-	for x in [0..grid.w]
-		for y in [0..grid.h]
+	newGrid = coffeeLife.grid
+	for x in [0..coffeeLife.grid.w]
+		for y in [0..coffeeLife.grid.h]
 			do =>
 			newGrid[x][y] = deadOrAlive(x,y)
-	window.grid = newGrid
+	coffeeLife.grid = newGrid
 
 initGraph = (w,h) ->
 	document.getElementById('life').innerHTML= "<canvas id=\"lifeCanvas\" width=\"#{w*10}\" height=\"#{h*10}\" > come on life ! </canvas>";
-	window.contexte = document.getElementById('lifeCanvas').getContext('2d');
-	window.contexte.fillStyle = "rgba(12,12,12,1)";
-	window.contexte.fillRect(0, 0, w*16, h*16)
+	coffeeLife.context = document.getElementById('lifeCanvas').getContext('2d');
 
 drawCell = (x,y) ->
-	if window.grid[x][y] is "alive"
-		window.contexte.fillStyle = "rgba(255,255,255,1)";
-		window.contexte.fillRect(x*10, y*10, 10, 10);
+	if coffeeLife.grid[x][y] is "alive"
+		coffeeLife.context.fillStyle = coffeeLife.params.alive;
+		coffeeLife.context.fillRect(x*10, y*10, 10, 10);
 	else
-		window.contexte.fillStyle = "rgba(0,0,0,1)";
-		window.contexte.fillRect(x*10,y*10, 10, 10);
+		coffeeLife.context.fillStyle = coffeeLife.params.dead;
+		coffeeLife.context.fillRect(x*10,y*10, 10, 10);
 
 drawGrid = ->
-	for x in [0..grid.w]
-		for y in [0..grid.h]
+	for x in [0..coffeeLife.grid.w]
+		for y in [0..coffeeLife.grid.h]
 			do => 
 				drawCell(x,y)
 
-drawLoop = =>
+drawLoop = ->
 	drawGrid()
 	nextGeneration()
 	setTimeout(drawLoop,100)
 
-window.coffeeLife = (width,height) =>
+coffeeLife.live = (width,height,params = new Object()) ->
+	if params.alive is undefined
+		params.alive = "black"
+
+	if params.dead is undefined
+		params.dead = "white"
+
+	coffeeLife.params = params
+
 	initGrid(width,height)
 	initGraph(width,height)
 	drawLoop()

@@ -29,16 +29,14 @@ add a div which id is "life" for the canvas
 
 	<div id="life"></div>
 
-call the function (it's in your window object) <-- This isn't right, right ?
+call the function (it's in your window object)
 
-	<script type="text/javascript"> coffeeLife(65,25); </script>
+	<script type="text/javascript"> coffeeLife.live(65,25); </script>
 
 Todo
 ----
 
-1. Add some options for custom use
-2. get the thing out of window ?
-3. cleaner syntax !
+1. Add some more options for custom use
 
 Licence & Disclaimer
 ------------------
