@@ -1,65 +1,81 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Coffeelife by cedias</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="https://raw.github.com/cedias/CoffeeLife/master/life.js"> </script>
-    <script src="javascripts/respond.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="stylesheets/ie.css">
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>CoffeeLife</title>
+        <meta name="description" content="Game of life in coffee script">
+        <meta name="viewport" content="width=device-width">
 
-  </head>
-  <body>
-      <div id="header">
-        <nav>
-          <li class="fork"><a href="https://github.com/cedias/CoffeeLife">View On GitHub</a></li>
-          <li class="downloads"><a href="https://github.com/cedias/CoffeeLife/zipball/master">ZIP</a></li>
-          <li class="downloads"><a href="https://github.com/cedias/CoffeeLife/tarball/master">TAR</a></li>
-          <li class="title">DOWNLOADS</li>
-        </nav>
-      </div><!-- end header -->
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <div class="wrapper">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="https://raw.github.com/cedias/CoffeeLife/master/life.js"> </script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
 
-      <section>
-        <div id="title">
-          <h1>Coffeelife</h1>
-          <p>Conway's Game of Life in coffee script</p>
-          <hr>
-          <span class="credits left">Project maintained by <a href="https://github.com/cedias">cedias</a></span>
-          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
-        </div>
+        <!-- Add your site or application content here -->
+        
+        <div class="container"
+            <div class="row">
+                 <div class="page-header">
+                <h1>Coffee Life - <small> Conway's Game of Life in CoffeeScript</small></h1> 
+                <a class="btn btn-info" href="https://github.com/cedias/CoffeeLife"> View on Github</a>
+                <a class="btn pull-right" href="https://github.com/cedias/CoffeeLife/tarball/master">Tarball</a>
+                <a class="btn pull-right" href="https://github.com/cedias/CoffeeLife/zipball/master">Zipball</a>   
+            </div>
+                <h2>Usage</h2>
+            <ul>
+                <li>include life.js in your webpage <code>&ltscript src="life.js"&gt &lt/script&gt</code></li>
+                
+                <li>add a div which id is "life" for the canvas <code>&ltdiv id="life"&gt&lt/div&gt</code></li>
+                
+                <li>call the function live(width,height,params) <code>&ltscript type="text/javascript"&gt coffeeLife.live(65,25[,params]); &lt/script&gt</code></li>
+                
+            </ul>
+                <h2>Parameters</h2>
+                <div class="span3">
+                    <form action="">
+                        <label><strong>alive:</strong> Alive Cells Color</label>
+                        <input id="alive" type="color" class="option" value="#000000">
+                        <label><strong>dead:</strong> Dead Cells Color</label>
+                        <input id="dead" type="color" class="option" value="#ffffff">
+                    </form>
+                </div>
+                <div class="span8">
+                    <div id="life"></div>
+                </div>
+            </div>
 
-        <div id="life">
-        </div>  
-	<script type="text/javascript">
-		coffeeLife.live(65,25);
-	</script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
 
-<h1>RULES</h1>
-
-<p>The universe of the Game of Life is an infinite two-dimensional orthogonal grid of square cells, each of which is in one of two possible states, alive or dead. Every cell interacts with its eight neighbours, which are the cells that are horizontally, vertically, or diagonally adjacent. At each step in time, the following transitions occur:</p>
-
-<pre><code>Any live cell with fewer than two live neighbours dies, as if caused by under-population.
-Any live cell with two or three live neighbours lives on to the next generation.
-Any live cell with more than three live neighbours dies, as if by overcrowding.
-Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
-</code></pre>
-
-<p>The initial pattern constitutes the seed of the system. The first generation is created by applying the above rules simultaneously to every cell in the seed—births and deaths occur simultaneously, and the discrete moment at which this happens is sometimes called a tick (in other words, each generation is a pure function of the preceding one). The rules continue to be applied repeatedly to create further generations.</p>
-      </section>
-
-    </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
-  </body>
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+        <script type="text/javascript">
+            launch = function(){
+                params = {alive: $("#alive").val(), dead: $("#dead").val()};
+                coffeeLife.live(60,30, params);
+            }
+            launch();
+            $(".option").change(launch);
+        </script>
+    </body>
 </html>
